@@ -1,0 +1,52 @@
+body {
+    background-color: grey;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    'myHeader myHeader myHeader'
+    'cat1 cat2 cat3'
+    'buttonChangeCat score buttonNext'
+    'picture picture answer1'
+    'picture picture answer2'
+    'picture picture answer3'
+    'picture picture answer4';
+}
+
+.myHeader { grid-area: myHeader; }
+
+.cat1 { grid-area: cat1; }
+
+.cat2 { grid-area: cat2; }
+
+.cat3 { grid-area: cat3; }
+
+.picture { grid-area: picture; }
+
+.answer1 { grid-area: answer1; }
+
+.answer2 { grid-area: answer2; }
+
+.answer3 { grid-area: answer3; }
+
+.answer4 { grid-area: answer4; }
+
+.buttonChangeCat { grid-area: buttonChangeCat; }
+
+.buttonNext { grid-area: buttonNext; }
+
+.score { grid-area: score; }
+
+.grid-container > div {
+    text-align: center;
+    border: double blue;
+    padding: 10px;
+    margin: 15px;
+    word-wrap: anywhere;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
