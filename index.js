@@ -30,12 +30,9 @@ const loadModels = async () => {
 const recognize = async () => {
     const input = document.getElementById("picture");
     const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceExpressions();
-    let answersArr = Object.entries(detectionsWithExpressions[0]['expressions'])
-    let answersMap = new Map();
-    for (let i=0; i<7; i++) {
-        answersMap.set(answersArr[i][0], answersArr[i][1]);
-    }
-    return answersMap; // returns map with emotion and it's score
+    return Object.entries(detectionsWithExpressions[0]['expressions']).sort(function (a, b) {
+        return b[1] - a[1];
+    });
 }
 
 const startGame = (category) => {
@@ -51,7 +48,6 @@ const startGame = (category) => {
 
 const processGame = async () => {
     recognize().then(res => {
-        console.log(res);
         checkAnswers(res);
         if (!nextPhoto()) {
             finishGame();
@@ -74,7 +70,5 @@ const finishGame = () => {
 }
 
 const checkAnswers = ( results ) => {
-    console.log(results.values());
-    console.log(Math.max(results.values()));
     console.log("Checking answers.")
 }
