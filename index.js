@@ -30,7 +30,8 @@ const loadModels = async () => {
 const recognize = async () => {
     const input = document.getElementById("picture");
     const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceExpressions();
-    return Object.entries(detectionsWithExpressions[0]['expressions']).sort(function (a, b) {
+    return Object.entries(detectionsWithExpressions[0]['expressions'])
+        .sort(function (a, b) {
         return b[1] - a[1];
     });
 }
@@ -70,5 +71,6 @@ const finishGame = () => {
 }
 
 const checkAnswers = ( results ) => {
+    console.log(results);
     console.log("Checking answers.")
 }
