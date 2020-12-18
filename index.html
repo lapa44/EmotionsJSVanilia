@@ -13,36 +13,39 @@
     <div class="cat1"><img src="assets/img/lotrCat.jpg" onclick="startGame('lotr')"></div>
     <div class="cat2"><img src="assets/img/starwarsCat.jpg" onclick="startGame('starwars')"></div>
     <div class="cat3"><img src="assets/img/potter.jpg" onclick="startGame('potter')"></div>
-    <div class="picture"><img src="assets/img/lotr/kar.jpg" onclick="recognize()" id="picture"></div>
+    <div class="picture"><img src="assets/img/lotr/kar.jpg" id="picture"></div>
     <div class="answer1">
-        <label class="container">Answer 1
+        <label class="container">
+            <label id="ans0">Answer 1</label>
             <input type="radio" name="radio">
             <span class="checkmark"></span>
         </label>
     </div>
     <div class="answer2">
-        <label class="container">Answer 2
+        <label class="container">
+            <label id="ans1">Answer 2</label>
             <input type="radio" name="radio">
             <span class="checkmark"></span>
         </label>
     </div>
     <div class="answer3">
-        <label class="container">Answer 3
+        <label class="container">
+            <label id="ans2">Answer 3</label>
             <input type="radio" name="radio">
             <span class="checkmark"></span>
         </label>
     </div>
     <div class="answer4">
-        <label class="container">Answer 4
+        <label class="container">
+            <label id="ans3">Answer 4</label>
             <input type="radio" name="radio">
             <span class="checkmark"></span>
         </label>
     </div>
     <div class="buttonChangeCat" onclick="showCats()"><button>Zmiana kategorii</button></div>
     <div class="score">Wynik</div>
-    <div class="buttonNext" onclick="processGame()"><button>Next pls</button></div>
+    <div class="buttonNext" onclick="processGame()" id="buttonNext"><button>Next pls</button></div>
 
 </div>
-<!--<img src="assets/img/lotr/kar.jpg" onclick="recognize()" id="picture">-->
 </body>
 </html>
