@@ -1,5 +1,4 @@
 let score = 0;
-let counter = 1;
 let catImgUrl;
 let photosArray = [1,2,3,4,5,6,7,8,9,10];
 let correctAnswer;
@@ -75,13 +74,10 @@ const startGame = (category) => {
     hideCategories();
     showLoader();
     score = 0;
-    counter = 1;
     catImgUrl = './assets/img/' + category + '/';
     loadModels().then(r => {
         console.log("Models loaded.")
-        console.log('unsorted: ' + photosArray);
         photosArray = faceapi.shuffleArray(photosArray);
-        console.log('sorted: ' + photosArray);
         document.getElementsByClassName('score').item(0).innerHTML = "Twój wynik to: " + score;
         nextPhoto();
     });
@@ -95,13 +91,13 @@ const processGame = async () => {
 }
 
 const nextPhoto = () => {
-    if (counter === 10) {
+    if (photosArray.length === 0) {
         return false;
     } else {
         showLoader();
         hideGuesser();
         document.getElementById('buttonNext').disabled = true;
-        document.getElementById("picture").src = catImgUrl + counter++ + '.jpg';
+        document.getElementById("picture").src = catImgUrl + photosArray.pop() + '.jpg';
         recognize().then(res => {
             correctAnswer = res[0][0];
             faceapi.shuffleArray(res);
