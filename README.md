@@ -21,7 +21,7 @@ To run this webapp you have to use
 
 ```http-server```
 
-Or just try it via [I'm an inline-style link](https://lapa44.github.io/EmotionsJSVanilia/)
+Or just try it via [GitHub Pages](https://lapa44.github.io/EmotionsJSVanilia/)
 
 ### Features
 * Choosing one of three categories: Lord Of The Rings, Star Wars and Harry Potter
