@@ -1,6 +1,6 @@
-let score = 0;
+let score;
 let catImgUrl;
-let photosArray = [1,2,3,4,5,6,7,8,9,10];
+let photosArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let correctAnswer;
 let correctRadio;
 let modelFlag = 0;
@@ -72,6 +72,7 @@ const recognize = async () => {
 
 const startGame = (category) => {
     hideCategories();
+    document.getElementsByClassName('endScores').item(0).style.display = 'none';
     showLoader();
     score = 0;
     catImgUrl = './assets/img/' + category + '/';
@@ -116,7 +117,11 @@ const nextPhoto = () => {
 }
 
 const finishGame = () => {
-    //todo finish game x points of 10
+    hideGuesser();
+    document.getElementsByClassName('endScores').item(0).innerHTML = "You've got "
+        + score + " of 10 points!<br><bold>Well done!</bold><br>You can try another category or the same if you want to beat your score!";
+    document.getElementsByClassName('endScores').item(0).style.display = 'block';
+    showCats();
     console.log("Finishing game.")
 }
 

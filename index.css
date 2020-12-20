@@ -7,6 +7,7 @@ body {
     grid-template-areas:
     'myHeader myHeader myHeader'
     'cat1 cat2 cat3'
+    'endScores endScores endScores'
     'loader loader loader'
     'buttonChangeCat score buttonNext'
     'picture picture answer1'
@@ -28,6 +29,16 @@ body {
 .cat2 { grid-area: cat2; }
 
 .cat3 { grid-area: cat3; }
+
+.endScores {
+    grid-area: endScores;
+    display: none;
+    text-align: center;
+    color: #eeeeee;
+    background-color: #66c323;
+    font: 30px bold;
+    border-radius: 10%;
+}
 
 .picture {
     grid-area: picture;
