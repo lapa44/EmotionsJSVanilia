@@ -7,6 +7,7 @@ body {
     grid-template-areas:
     'myHeader myHeader myHeader'
     'cat1 cat2 cat3'
+    'loader loader loader'
     'buttonChangeCat score buttonNext'
     'picture picture answer1'
     'picture picture answer2'
@@ -14,7 +15,13 @@ body {
     'picture picture answer4';
 }
 
-.myHeader { grid-area: myHeader; }
+.myHeader {
+    grid-area: myHeader;
+    text-align: center;
+    background: #4CAF50;
+    color: white;
+    font: 30px bold;
+}
 
 .cat1 { grid-area: cat1; }
 
@@ -22,25 +29,93 @@ body {
 
 .cat3 { grid-area: cat3; }
 
-.picture { grid-area: picture; }
+.picture {
+    grid-area: picture;
+    display: none;
+}
 
-.answer1 { grid-area: answer1; }
+.answer1 {
+    grid-area: answer1;
+    display: none;
+}
 
-.answer2 { grid-area: answer2; }
+.answer2 {
+    grid-area: answer2;
+    display: none;
+}
 
-.answer3 { grid-area: answer3; }
+.answer3 {
+    grid-area: answer3;
+    display: none;
+}
 
-.answer4 { grid-area: answer4; }
+.answer4 {
+    grid-area: answer4;
+    display: none;
+}
 
-.buttonChangeCat { grid-area: buttonChangeCat; }
+button {
+    background-color: black;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 200px;
+}
 
-.buttonNext { grid-area: buttonNext; }
+#buttonNext {
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #4CAF50;
+}
 
-.score { grid-area: score; }
+#buttonNext:hover {
+    background-color: white;
+    color: black;
+}
+
+#buttonChangeCat {
+    background-color: #e08e16;
+    color: white;
+    border: 2px solid #e08e16;
+}
+
+#buttonChangeCat:hover {
+    background-color: white;
+    color: black;
+}
+
+.buttonChangeCat {
+    grid-area: buttonChangeCat;
+    display: none;
+}
+
+.buttonNext {
+    grid-area: buttonNext;
+    display: none;
+}
+
+.score {
+    grid-area: score;
+    font: 30px bold;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    background: darkgreen;
+    display: none;
+    min-width: 95px;
+    line-height: 50px;
+}
 
 .grid-container > div {
     text-align: center;
-    border: double blue;
     padding: 10px;
     margin: 15px;
     word-wrap: anywhere;
@@ -57,12 +132,10 @@ img {
     display: block;
     position: relative;
     padding-left: 35px;
+    padding-right: 35px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -114,4 +187,40 @@ img {
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+
+.loader {
+    display: none;
+    grid-area: loader;
+    position: relative;
+    left: calc(50% - 100px);
+    border: 40px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 40px solid #3498db;
+    width: 120px;
+    height: 120px;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader > span {
+    display: inline-block;
+    animation: no-spin 5s alternate-reverse infinite;
+    color: #eeeeee;
+    font: 20px bold;
+}
+
+@keyframes no-spin {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+label {
+    font: 30px bold;
+    text-align: left;
+    color: white;
 }

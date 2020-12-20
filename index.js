@@ -4,25 +4,61 @@ let catImgUrl;
 let photosArray = [1,2,3,4,5,6,7,8,9,10];
 let correctAnswer;
 let correctRadio;
+let modelFlag = 0;
 
 const hideCategories = () => {
+    document.getElementsByClassName('myHeader').item(0).innerHTML = 'Emotions Guesser!';
     for (let i = 1; i < 4; i++) {
         document.getElementsByClassName("cat" + i).item(0).style.display = 'none';
     }
 }
 
 const showCats = () => {
+    document.getElementsByClassName('myHeader').item(0).innerHTML = 'Pick your category and guess emotions!';
     for (let i = 1; i < 4; i++) {
         document.getElementsByClassName("cat" + i).item(0).style.display = 'block';
     }
+    hideGuesser();
+}
+
+const hideGuesser = () => {
+    for (let i = 1; i < 5; i++) {
+        document.getElementsByClassName('answer' + i).item(0).style.display = 'none';
+    }
+    document.getElementsByClassName('score').item(0).style.display = 'none';
+    document.getElementsByClassName('picture').item(0).style.display = 'none';
+    document.getElementsByClassName('buttonNext').item(0).style.display = 'none';
+    document.getElementsByClassName('buttonChangeCat').item(0).style.display = 'none';
+}
+
+const showGuesser = () => {
+    for (let i = 1; i < 5; i++) {
+        document.getElementsByClassName('answer' + i).item(0).style.display = 'block';
+    }
+    document.getElementsByClassName('score').item(0).style.display = 'block';
+    document.getElementsByClassName('picture').item(0).style.display = 'block';
+    document.getElementsByClassName('buttonNext').item(0).style.display = 'block';
+    document.getElementsByClassName('buttonChangeCat').item(0).style.display = 'block';
+}
+
+const hideLoader = () => {
+    document.getElementsByClassName('loader').item(0).style.display = 'none';
+}
+
+const showLoader = () => {
+    document.getElementsByClassName('loader').item(0).style.display = 'block';
 }
 
 const loadModels = async () => {
+    if (modelFlag === 1) {
+        return;
+    }
     const MODEL_URL = './assets/models'
     await faceapi.loadSsdMobilenetv1Model(MODEL_URL)
     await faceapi.loadFaceLandmarkModel(MODEL_URL)
     await faceapi.loadFaceRecognitionModel(MODEL_URL)
     await faceapi.loadFaceExpressionModel(MODEL_URL)
+    modelFlag = 1;
 }
 
 const recognize = async () => {
@@ -36,21 +72,23 @@ const recognize = async () => {
 }
 
 const startGame = (category) => {
-    // moze ladowac 10 zdjec i pasek ladowania 0-100% co 10%
+    hideCategories();
+    showLoader();
     score = 0;
     counter = 1;
     catImgUrl = './assets/img/' + category + '/';
     loadModels().then(r => {
         console.log("Models loaded.")
-        hideCategories();
+        console.log('unsorted: ' + photosArray);
         photosArray = faceapi.shuffleArray(photosArray);
+        console.log('sorted: ' + photosArray);
         document.getElementsByClassName('score').item(0).innerHTML = "Twój wynik to: " + score;
         nextPhoto();
     });
 }
 
 const processGame = async () => {
-    checkAnswers();
+    await checkAnswers();
     if (!nextPhoto()) {
         finishGame();
     }
@@ -60,8 +98,9 @@ const nextPhoto = () => {
     if (counter === 10) {
         return false;
     } else {
-        //todo loader start
-        document.getElementById('buttonNext').setAttribute('disabled', 'true');
+        showLoader();
+        hideGuesser();
+        document.getElementById('buttonNext').disabled = true;
         document.getElementById("picture").src = catImgUrl + counter++ + '.jpg';
         recognize().then(res => {
             correctAnswer = res[0][0];
@@ -72,13 +111,10 @@ const nextPhoto = () => {
                     correctRadio = i;
                 }
             }
-            document.getElementById('ans0').innerHTML = res[0][0];
-            document.getElementById('ans1').innerHTML = res[1][0];
-            document.getElementById('ans2').innerHTML = res[2][0];
-            document.getElementById('ans3').innerHTML = res[3][0];
-            document.getElementById('buttonNext').setAttribute('disabled', 'false');
+            hideLoader();
+            showGuesser();
+            document.getElementById('buttonNext').disabled = false;
         })
-        //todo loader stop
         return true;
     }
 }
@@ -88,11 +124,27 @@ const finishGame = () => {
     console.log("Finishing game.")
 }
 
-const checkAnswers = () => {
+const checkAnswers = async () => {
     console.log("Checking answers.")
+    document.getElementsByClassName('container').item(correctRadio).style.backgroundColor = 'green';
     if (document.getElementsByName('radio').item(correctRadio).checked) {
         document.getElementsByClassName('score').item(0).innerHTML = "Twój wynik to: " + ++score;
-        return true;
+        document.getElementsByName('radio').item(correctRadio).checked = false;
+    } else {
+        for (let i = 0; i < 4; i++) {
+            if (document.getElementsByName('radio').item(i).checked && i !== correctRadio) {
+                document.getElementsByClassName('container').item(i).style.backgroundColor = 'red';
+                document.getElementsByName('radio').item(i).checked = false;
+            }
+        }
+    }
+    await new Promise(r => setTimeout(r, 2000));
+    for (let i = 0; i < 4; i++) {
+        document.getElementsByClassName('container').item(i).style.backgroundColor = 'grey';
     }
     return false;
+}
+
+const clickRadio = (number) => {
+    document.getElementsByName('radio').item(number).checked = true;
 }
