@@ -223,4 +223,9 @@ label {
     font: 30px bold;
     text-align: left;
     color: white;
+
+}
+
+label:first-letter {
+    text-transform:capitalize;
 }

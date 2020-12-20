@@ -100,7 +100,7 @@ const nextPhoto = () => {
         document.getElementById("picture").src = catImgUrl + photosArray.pop() + '.jpg';
         recognize().then(res => {
             correctAnswer = res[0][0];
-            faceapi.shuffleArray(res);
+            res = faceapi.shuffleArray(res);
             for (let i = 0; i < 4; i++) {
                 document.getElementById('ans' + i).innerHTML = res[i][0];
                 if (correctAnswer === res[i][0]) {
