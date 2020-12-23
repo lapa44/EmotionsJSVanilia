@@ -66,6 +66,7 @@ body {
 }
 
 button {
+    justify-self: center;
     background-color: black;
     border: none;
     border-radius: 50%;
@@ -115,6 +116,7 @@ button {
 
 .score {
     grid-area: score;
+    position: center;
     font: 30px bold;
     color: white;
     text-align: center;
