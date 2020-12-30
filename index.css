@@ -232,3 +232,22 @@ label {
 label:first-letter {
     text-transform:capitalize;
 }
+
+@media (max-width: 900px) {
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+        'myHeader myHeader'
+        'cat1 cat1'
+        'cat2 cat2'
+        'cat3 cat3'
+        'endScores endScores'
+        'loader loader'
+        'score score'
+        'buttonChangeCat buttonNext'
+        'picture answer1'
+        'picture answer2'
+        'picture answer3'
+        'picture answer4';
+    }
+}
