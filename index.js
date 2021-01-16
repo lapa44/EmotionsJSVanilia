@@ -1,6 +1,6 @@
 let score;
 let catImgUrl;
-let photosArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let photosArray;
 let correctAnswer;
 let correctRadio;
 let modelFlag = 0;
@@ -72,6 +72,7 @@ const recognize = async () => {
 
 const startGame = (category) => {
     hideCategories();
+    photosArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     document.getElementsByClassName('endScores').item(0).style.display = 'none';
     showLoader();
     score = 0;
