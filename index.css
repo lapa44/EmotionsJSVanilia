@@ -2,6 +2,7 @@ body {
     background-color: grey;
 }
 
+@media (min-width: 900px) {
 .grid-container {
     display: grid;
     grid-template-areas:
@@ -14,7 +15,7 @@ body {
     'picture picture answer2'
     'picture picture answer3'
     'picture picture answer4';
-}
+}}
 
 .myHeader {
     grid-area: myHeader;
